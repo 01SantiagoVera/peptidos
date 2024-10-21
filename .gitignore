@@ -1,0 +1,34 @@
+# Archivos de entorno
+.env
+
+# Archivos de configuración de editor
+.vscode/
+.idea/
+
+# Entornos virtuales de Python
+venv/
+ENV/
+env/
+venv.bak/
+
+# Archivos de caché de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Archivos de base de datos
+*.sqlite3
+
+# Archivos de logs
+*.log
+
+# Carpeta de dependencias
+node_modules/
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Modelos pickle
+*.pkl
