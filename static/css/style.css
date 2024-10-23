@@ -5,7 +5,10 @@ body {
   color: white;
   background: #202731;
 }
+/*---- animate text ------*/
 
+
+/*---- section ------*/
 section {
   position: relative;
   display: flex;
@@ -26,6 +29,21 @@ section {
     rgba(70, 116, 255, 0.93) 100% /* Color más claro abajo */
   );
   background-size: cover;
+}
+#hero {
+  text-align: left; /* Asegura que todo el texto esté alineado a la izquierda */
+}
+
+#hero h1 {
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  font-size: 6vw;
+  white-space: nowrap;
+}
+
+#hero button {
+  align-self: flex-start; /* Asegura que el botón también esté alineado a la izquierda */
 }
 
 /*---- Waves ------*/
@@ -87,4 +105,112 @@ section {
  /*---- navBar ------*/
 .navbar .nav-link {
   color: #fff !important;
+}
+
+/* Estilo para el header */
+#header {
+    background: transparent; /* Transparente al inicio */
+    transition: background 0.3s ease, height 0.3s ease; /* Suaviza la transición */
+    padding: 10px 0;
+    z-index: 9999; /* Asegura que esté por encima de otros elementos */
+    height: 100px;
+    display: flex;
+    align-items: center;
+}
+/* Estilo del header al hacer scroll */
+#header.scrolled {
+     background: rgba(0, 0, 0, 0.8);
+    height: 70px;
+}
+/* Estilo del botón de menú en móviles */
+.mobile-nav-toggle {
+    background: transparent; /* Fondo transparente */
+    border: none; /* Sin borde */
+    color: #fff; /* Color blanco para el ícono */
+    font-size: 24px; /* Tamaño del ícono */
+    cursor: pointer; /* Cambiar cursor al pasar por encima */
+    padding: 10px; /* Espaciado alrededor del botón */
+    z-index: 1000; /* Asegúrate de que esté por encima de otros elementos */
+     margin-left: 20px;
+}
+
+/* Opcional: efecto hover para el botón */
+.mobile-nav-toggle:hover {
+    color: rgba(255, 255, 255, 0.8); /* Color al pasar el mouse */
+}
+
+/* Estilos para el menú de navegación */
+.nav-menu {
+    display: flex;
+    justify-content: flex-end;
+    margin-left: auto;
+}
+
+/* Ocultar el menú de navegación en dispositivos móviles */
+.nav-menu.d-none {
+    display: none;
+}
+
+
+
+/* Estilo de los enlaces del menú */
+.nav-menu a {
+    color: #fff; /* Color de los enlaces */
+    padding: 15px;
+    text-decoration: none;
+    position: relative;
+}
+.nav-menu a::after {
+    content: ''; /* Crear un pseudo-elemento */
+    display: block; /* Hace que el pseudo-elemento sea un bloque */
+    width: 0; /* Ancho inicial */
+    height: 2px; /* Altura del subrayado */
+    background: #fff; /* Color del subrayado */
+    transition: width 0.3s ease; /* Suaviza la transición del subrayado */
+    position: absolute; /* Posiciona el pseudo-elemento */
+    left: 50%; /* Centrar horizontalmente */
+    bottom: -5px; /* Espacio debajo del texto */
+    transform: translateX(-50%); /* Ajustar para centrar */
+}
+.nav-menu a:hover::after {
+    color: #fff;
+    text-decoration: none;
+    width: 100%; /* Expande el subrayado al ancho completo del enlace */
+}
+/* Alinear horizontalmente los elementos de la lista en el menú de navegación */
+.nav-menu ul {
+    display: flex; /* Usa flexbox para alinear los elementos horizontalmente */
+    list-style: none; /* Elimina los puntos de la lista */
+    padding: 0; /* Elimina el padding de la lista */
+    margin: 0; /* Elimina el margin de la lista */
+}
+
+/* Alinear los elementos de la lista */
+.nav-menu li {
+    margin-right: 20px; /* Espacio entre los elementos de la lista */
+}
+
+/* Opcional: quita el margen del último elemento */
+.nav-menu li:last-child {
+    margin-right: 0; /* Elimina el margen del último elemento */
+}
+
+/* Eliminar el margen del logo */
+.logo {
+    color: #fff;
+    text-decoration: none;
+    height: 100%; /* Asegura que el logo se ajuste a la altura del encabezado */
+    transition: height 0.3s ease;
+
+}
+.logo h1,a{
+    color: #fff;
+    text-decoration: none;
+}
+.logo a:hover {
+    color: #fff;
+    text-decoration: none; /* Asegúrate de que no haya subrayado al hacer hover */
+}
+#header.scrolled .logo {
+    height: 70%; /* Ajusta la altura del logo al hacer scroll */
 }
