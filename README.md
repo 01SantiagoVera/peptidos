@@ -25,7 +25,7 @@ antimicrobial_predictor/
 │   ├── config.py
 ├── database/
 │   ├── db_mysql.py
-├── public/                    # Archivos públicos accesibles por el servidor
+├── static/                    # Archivos públicos accesibles por el servidor
 │   ├── css/
 │   ├── js/
 │   ├── images/

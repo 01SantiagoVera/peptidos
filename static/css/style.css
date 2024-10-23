@@ -1,0 +1,90 @@
+/*---- Body ------*/
+body {
+  margin: 0;
+  font-family: 'Promt', sans-serif;
+  color: white;
+  background: #202731;
+}
+
+section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 400px;
+  padding: 100px 20vw;
+}
+
+#hero {
+  width: 100%;
+  padding: 120px 0 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 20, 30, 0.95) 0%,  /* Color más oscuro arriba */
+    rgba(70, 116, 255, 0.4) 40%, /* Transición suave en el medio */
+    rgba(70, 116, 255, 0.7) 70%, /* Color intermedio */
+    rgba(70, 116, 255, 0.93) 100% /* Color más claro abajo */
+  );
+  background-size: cover;
+}
+
+/*---- Waves ------*/
+.waves {
+  position: relative;
+  width: 100%;
+  height: 15vh;
+  margin-bottom: -7px;
+  min-height: 100px;
+  max-height: 400px;
+  transform: rotate(180deg); /* Invertir las olas */
+}
+
+/* Animation */
+.parallax > use {
+  animation: move-forever 25s cubic-bezier(.55, .5, .45, .5) infinite;
+}
+
+.parallax > use:nth-child(1) {
+  animation-delay: -2s;
+  animation-duration: 7s;
+}
+
+.parallax > use:nth-child(2) {
+  animation-delay: -3s;
+  animation-duration: 10s;
+}
+
+.parallax > use:nth-child(3) {
+  animation-delay: -4s;
+  animation-duration: 13s;
+}
+
+.parallax > use:nth-child(4) {
+  animation-delay: -5s;
+  animation-duration: 20s;
+}
+
+@keyframes move-forever {
+  0% {
+    transform: translate3d(-90px, 0, 0);
+  }
+  100% {
+    transform: translate3d(85px, 0, 0);
+  }
+}
+
+/*Shrinking for mobile*/
+@media (max-width: 768px) {
+  .waves {
+    height: 40px;
+    min-height: 40px;
+  }
+  .content {
+    height: 30vh;
+  }
+}
+
+ /*---- navBar ------*/
+.navbar .nav-link {
+  color: #fff !important;
+}

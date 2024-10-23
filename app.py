@@ -4,7 +4,7 @@ from app.routes.api import api_bp
 from config.config import Config
 
 # Crear la aplicación Flask y especificar la ruta de las plantillas
-app = Flask(__name__, template_folder='resources/views', static_folder='public')
+app = Flask(__name__, template_folder='resources/views')
 
 # Cargar configuración
 app.config.from_object(Config)
