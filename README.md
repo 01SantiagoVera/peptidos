@@ -47,7 +47,6 @@ antimicrobial_predictor/
 - Python 3.10+
 - Pip (administrador de paquetes de Python)
 - Flask (instalado mediante requirements.txt)
-- Laragon (para gestionar el servidor local)
 
 ## Instalación
 ### Paso 1: Clonar el repositorio
@@ -72,23 +71,8 @@ SECRET_KEY=mysecretkey
 DATABASE_URL=mysql://user:password@localhost/db_name
 ```
 ### Paso 5: Ejecutar la aplicación
-#### 1. Instalar Laragon:
-- Si no lo tienes instalado, descarga Laragon desde https://laragon.org/.
-- Instálalo y asegúrate de que esté ejecutando Apache/Nginx y MySQL (o el servidor de base de datos que desees usar).
-#### 2. Colocar el proyecto en el directorio de Laragon:
-- Mueve la carpeta del proyecto antimicrobial_predictor al directorio C:\laragon\www\.
 
-#### 3. Configurar Virtual Host en Laragon (opcional):
-- Abre Laragon, ve a Menu > Apache > Virtual Hosts > Add.
-- Ingresa el nombre del proyecto, por ejemplo antimicrobial_predictor.test.
-- Laragon creará un Virtual Host, lo que te permitirá acceder al proyecto usando http://antimicrobial_predictor.test en el navegador.
-
-#### 4. Iniciar Laragon:
-- Abre Laragon y haz clic en Start All para iniciar los servicios.
-- Si configuraste el Virtual Host, visita http://antimicrobial_predictor.test o, si no lo hiciste, visita http://localhost/antimicrobial_predictor para verificar que el proyecto esté funcionando.
-
-#### 5. Ejecutar Flask en Laragon:
-- Si deseas ejecutar Flask manualmente dentro de Laragon, abre una terminal dentro del directorio del proyecto y ejecuta:
+abre una terminal dentro del directorio del proyecto y ejecuta:
 ```bash
 python app.py
 ```

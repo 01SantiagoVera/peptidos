@@ -38,8 +38,14 @@ section {
   text-align: center;
   font-family: 'Poppins', sans-serif;
   position: relative;
-  font-size: 6vw;
+  font-size: 5vw;
   white-space: nowrap;
+}
+
+#hero a{
+    text-align: center;
+    position: relative;
+
 }
 
 #hero button {
@@ -213,4 +219,23 @@ section {
 }
 #header.scrolled .logo {
     height: 70%; /* Ajusta la altura del logo al hacer scroll */
+}
+
+.hidden {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-100%);
+    transition: all 1s;
+}
+
+@media (prefers-reduced-motion) {
+    .hidden {
+        transition: none;
+    }
+}
+
+.show {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
 }
