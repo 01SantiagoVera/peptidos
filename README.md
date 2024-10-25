@@ -52,7 +52,7 @@ antimicrobial_predictor/
 ## Instalación
 ### Paso 1: Clonar el repositorio
 ```bash
-git clone https://github.com/usuario/antimicrobial_predictor.git
+git clone https://github.com/01SantiagoVera/peptidos.git
 cd antimicrobial_predictor
 ```
 ### Paso 2: Crear y activar un entorno virtual
