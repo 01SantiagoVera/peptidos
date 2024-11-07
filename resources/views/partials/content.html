@@ -10,9 +10,10 @@
 
     <!-- Nueva fila para botón y formulario alineados horizontalmente -->
     <div class="row justify-content-center align-items-center mt-4">
-      <div class="col-auto" >
-          <button  type="button" class="btn btn-outline-light" id="aboutUsButton" ><a href="#aboutUs">About us</a></button>
-      </div>
+      <div class="col-auto">
+  <button type="button" class="btn btn-outline-light" id="aboutUsButton" onclick="location.href='#aboutUs'">About us</button>
+</div>
+
 
       <div class="col-auto">
     <form id="prediction-form" class="d-flex">
@@ -41,20 +42,22 @@
   </g>
 </svg>
 
+
 <!-- About Us Section -->
-<section id="aboutUs" class="about-us-section hidden py-5">
+<section id="aboutUs" class="about-us-section py-5">
   <div class="container">
     <div class="row align-items-center d-flex">
-      <div class="col-md-6">
+      <div class="col-md-6 animate-fade-in">
         <h1 class="mb-0">About us</h1>
         <p class="mb-0">Research in the field of antimicrobial peptides by providing a comprehensive and easy-to-use API. Our platform offers access to extensive data, enabling researchers and developers to analyze, predict, and innovate in biomedical sciences.</p>
       </div>
-      <div class="col-md-6 text-end">
+      <div class="col-md-6 text-end animate-fade-in">
         <img src="{{ url_for('static', filename='img/logo_transparent.png') }}" class="img-fluid" alt="logo UDES" style="max-width: 200px;">
       </div>
     </div>
   </div>
 </section>
+
 
 
 

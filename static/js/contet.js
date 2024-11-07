@@ -1,4 +1,3 @@
-
 let lastKnownScrollPosition = 0;
 let ticking = false;
 
@@ -9,11 +8,14 @@ document.addEventListener("scroll", function() {
         window.requestAnimationFrame(function() {
             const aboutUsSection = document.getElementById("aboutUs");
             const sectionPosition = aboutUsSection.getBoundingClientRect().top;
-            const screenPosition = window.innerHeight / 1.2; // Cambia esto a 1.2 para que espere un poco más
+            const screenPosition = window.innerHeight / 1.2;
 
             // Si la posición de la sección es visible en el viewport
-            if (sectionPosition < screenPosition && !aboutUsSection.classList.contains("show")) {
-                aboutUsSection.classList.add("show");
+            if (sectionPosition < screenPosition) {
+                const elementsToAnimate = aboutUsSection.querySelectorAll(".animate-fade-in");
+                elementsToAnimate.forEach((element) => {
+                    element.classList.add("show");
+                });
             }
 
             ticking = false;

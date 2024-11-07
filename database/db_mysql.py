@@ -1,13 +1,17 @@
 import pyodbc
+from dotenv import load_dotenv
+import os
+
+# Cargar las variables de entorno del archivo .env
+load_dotenv()
 
 def connect_to_database():
-    # Configura la cadena de conexión
     connection_string = (
-        "DRIVER={ODBC Driver 17 for SQL Server};"  # Asegúrate de que el controlador esté instalado
-        "SERVER=localhost;"  # Por ejemplo: "localhost" o "127.0.0.1"
-        "DATABASE=peptidos;"  # El nombre de tu base de datos
-        "UID=client;"  # Tu nombre de usuario
-        "PWD=1234;"  # Tu contraseña
+        f"DRIVER={{ODBC Driver 17 for SQL Server}};"
+        f"SERVER={os.getenv('DB_SERVER')};"
+        f"DATABASE={os.getenv('DB_DATABASE')};"
+        f"UID={os.getenv('DB_USER')};"
+        f"PWD={os.getenv('DB_PASSWORD')};"
     )
 
     # Intenta establecer la conexión
@@ -15,7 +19,10 @@ def connect_to_database():
         connection = pyodbc.connect(connection_string)
         print("Conexión exitosa a la base de datos")
         return connection
-    except Exception as e:
+    except pyodbc.InterfaceError:
+        print("Error de conexión: el controlador o servidor podría ser incorrecto.")
+        return None
+    except pyodbc.Error as e:
         print("Error al conectar a la base de datos:", e)
         return None
 

@@ -12,6 +12,5 @@ def load_models():
 
 def make_prediction(models, sequence):
     # model_SVM, model_RF, model_NN = models
-    # Aquí iría la lógica para procesar la secuencia y hacer la predicción
     prediction = "Predicción simulada"
     return prediction
