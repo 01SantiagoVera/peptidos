@@ -1,61 +1,70 @@
 <section id="hero" class="hero-section">
-  <div class="container-fluid aos-init aos-animate" data-aos="fade-up">
-    <div class="row justify-content-center align-items-center text-center">
-      <div class="col-xl-5 col-lg-6 d-flex flex-column align-items-center">
-        <!-- Títulos -->
-        <h1 class="hero">Antimicrobial Peptides</h1>
-        <p>Platform for discovering, analyzing, and predicting antimicrobial peptides to support research and development in biomedical fields.</p>
-      </div>
-    </div>
-
-    <!-- Nueva fila para botón y formulario alineados horizontalmente -->
-    <div class="row justify-content-center align-items-center mt-4">
-      <div class="col-auto">
-  <button type="button" class="btn btn-outline-light" id="aboutUsButton" onclick="location.href='#aboutUs'">About us</button>
-</div>
-
-
-      <div class="col-auto">
-    <form id="prediction-form" class="d-flex">
-        <div class="input-group">
-            <input type="text" name="sequence" class="form-control form-control-lg" placeholder="Search by Skills" aria-label="Search by Skills" aria-describedby="submit-btn" />
-            <button class="btn btn-primary btn-lg" type="submit" id="submit-btn">Submit</button>
+    <div class="container-fluid aos-init aos-animate" data-aos="fade-up">
+        <div class="row justify-content-center align-items-center text-center">
+            <div class="col-xl-5 col-lg-6 d-flex flex-column align-items-center">
+                <!-- Títulos -->
+                <h1 class="hero">Antimicrobial Peptides</h1>
+                <p>Platform for discovering, analyzing, and predicting antimicrobial peptides to support research and
+                    development in biomedical fields.</p>
+            </div>
         </div>
-    </form>
-</div>
+
+        <!-- Nueva fila para botón y formulario alineados horizontalmente -->
+        <div class="row justify-content-center align-items-center mt-4">
+            <div class="col-auto">
+                <button type="button" class="btn btn-outline-light" id="aboutUsButton"
+                        onclick="location.href='#aboutUs'">About us
+                </button>
+            </div>
 
 
+            <div class="col-auto">
+                <form id="prediction-form" class="d-flex">
+                    <div class="input-group">
+                        <input type="text" name="sequence" class="form-control form-control-lg"
+                               placeholder="Search by Skills" aria-label="Search by Skills"
+                               aria-describedby="submit-btn"/>
+                        <button class="btn btn-primary btn-lg" type="submit" id="submit-btn">Submit</button>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
     </div>
-  </div>
 </section>
 
 <!-- Waves SVG -->
-<svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-  <defs>
-    <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-  </defs>
-  <g class="parallax">
-    <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(70, 116, 255, 0.93)" />
-    <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(70, 116, 255, 0.7)" />
-    <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(70, 116, 255, 0.5)" />
-    <use xlink:href="#gentle-wave" x="48" y="7" fill="rgba(70, 116, 255, 0.3)" />
-  </g>
+<svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28"
+     preserveAspectRatio="none" shape-rendering="auto">
+    <defs>
+        <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"/>
+    </defs>
+    <g class="parallax">
+        <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(70, 116, 255, 0.93)"/>
+        <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(70, 116, 255, 0.7)"/>
+        <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(70, 116, 255, 0.5)"/>
+        <use xlink:href="#gentle-wave" x="48" y="7" fill="rgba(70, 116, 255, 0.3)"/>
+    </g>
 </svg>
 
 
 <!-- About Us Section -->
 <section id="aboutUs" class="about-us-section py-5">
-  <div class="container">
-    <div class="row align-items-center d-flex">
-      <div class="col-md-6 animate-fade-in">
-        <h1 class="mb-0">About us</h1>
-        <p class="mb-0">Research in the field of antimicrobial peptides by providing a comprehensive and easy-to-use API. Our platform offers access to extensive data, enabling researchers and developers to analyze, predict, and innovate in biomedical sciences.</p>
-      </div>
-      <div class="col-md-6 text-end animate-fade-in">
-        <img src="{{ url_for('static', filename='img/logo_transparent.png') }}" class="img-fluid" alt="logo UDES" style="max-width: 200px;">
-      </div>
+    <div class="container">
+        <div class="row align-items-center d-flex">
+            <div class="col-md-6 animate-fade-in">
+                <h1 class="mb-0">About us</h1>
+                <p class="mb-0">Research in the field of antimicrobial peptides by providing a comprehensive and
+                    easy-to-use API. Our platform offers access to extensive data, enabling researchers and developers
+                    to analyze, predict, and innovate in biomedical sciences.</p>
+            </div>
+            <div class="col-md-6 text-end animate-fade-in">
+                <img src="{{ url_for('static', filename='img/logo_transparent.png') }}" class="img-fluid"
+                     alt="logo UDES" style="max-width: 200px;">
+            </div>
+        </div>
     </div>
-  </div>
 </section>
 
 

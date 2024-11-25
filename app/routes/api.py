@@ -11,6 +11,9 @@ def predict():
         sequence = data.get('sequence')
         user_ip = request.remote_addr  # Captura la IP del usuario
 
+        if not sequence:
+            return jsonify(error="No se proporcionó una secuencia"), 400
+
         # Realizar la predicción
         prediction = predict_antimicrobial(sequence)
 
