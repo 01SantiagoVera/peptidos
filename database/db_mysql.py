@@ -26,6 +26,7 @@ def connect_to_database():
         print("Error al conectar a la base de datos:", e)
         return None
 
+
 def save_query(sequence, prediction, user_ip):
     connection = connect_to_database()
     if connection is None:
@@ -33,9 +34,12 @@ def save_query(sequence, prediction, user_ip):
 
     cursor = connection.cursor()
 
-    # Consulta SQL para insertar datos
+    # Convertir la predicción a una cadena JSON para almacenarla
+    prediction_str = str(prediction)
+
+    # Usar placeholders de ODBC (?) en lugar de %s
     query = "INSERT INTO consultas (sequence, prediction, user_ip, timestamp) VALUES (?, ?, ?, GETDATE())"
-    values = (sequence, prediction, user_ip)
+    values = (sequence, prediction_str, user_ip)
 
     try:
         cursor.execute(query, values)
@@ -43,6 +47,7 @@ def save_query(sequence, prediction, user_ip):
         print("Consulta guardada correctamente")
     except Exception as e:
         print("Error al guardar la consulta:", e)
+        connection.rollback()
     finally:
         cursor.close()
         connection.close()

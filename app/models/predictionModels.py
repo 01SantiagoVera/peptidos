@@ -85,67 +85,42 @@ def load_models():
     return model_SVM, model_RF, model_NN
 
 
-def make_prediction(models, sequence):
-    """
-    Realizar predicciones usando probabilidades de los modelos.
-
-    Args:
-        models (tuple): (model_SVM, model_RF, model_NN)
-        sequence (str): Secuencia peptídica de entrada
-
-    Returns:
-        dict: Diccionario con las probabilidades y la predicción final
-    """
+def make_prediction(models, sequence, selected_models):
     model_SVM, model_RF, model_NN = models
+    encoded_sequence = process_sequence(sequence)
 
-    try:
-        # Procesar la secuencia
-        encoded_sequence = process_sequence(sequence)
+    probabilities = {}
 
-        # Obtener las probabilidades de la clase positiva (índice 1)
-        prob_svm = model_SVM.predict_proba(encoded_sequence)[0][1]
-        prob_rf = model_RF.predict_proba(encoded_sequence)[0][1]
-        prob_nn = model_NN.predict_proba(encoded_sequence)[0][1]
+    # Predicciones individuales
+    if "SVM" in selected_models:
+        probabilities["SVM_probability"] = round(model_SVM.predict_proba(encoded_sequence)[0][1], 2)
+    else:
+        probabilities["SVM_probability"] = None
 
-        # Calcular la probabilidad promedio
-        avg_probability = (prob_svm + prob_rf + prob_nn) / 3
+    if "RF" in selected_models:
+        probabilities["RandomForest_probability"] = round(model_RF.predict_proba(encoded_sequence)[0][1], 2)
+    else:
+        probabilities["RandomForest_probability"] = None
 
-        # Definir umbral para la predicción final (puede ajustarse)
-        threshold = 0.5
+    if "NN" in selected_models:
+        probabilities["NeuralNetwork_probability"] = round(model_NN.predict_proba(encoded_sequence)[0][1], 2)
+    else:
+        probabilities["NeuralNetwork_probability"] = None
 
-        # Realizar la predicción final según la probabilidad promedio
-        final_prediction = "Es un péptido antimicrobiano" if avg_probability >= threshold else "No es un péptido antimicrobiano"
+    # Cálculo del promedio solo con valores válidos
+    valid_probabilities = [
+        value for value in probabilities.values() if value is not None
+    ]
+    avg_probability = round(sum(valid_probabilities) / len(valid_probabilities), 2) if valid_probabilities else None
 
-        # Devolver los resultados detallados
-        results = {
-            "SVM_probability": round(prob_svm, 4),
-            "RandomForest_probability": round(prob_rf, 4),
-            "NeuralNetwork_probability": round(prob_nn, 4),
-            "average_probability": round(avg_probability, 4),
-            "final_prediction": final_prediction
-        }
+    probabilities["average_probability"] = avg_probability
+    probabilities["final_prediction"] = (
+        "Es un péptido antimicrobiano"
+        if avg_probability is not None and avg_probability >= 0.5
+        else "No es un péptido antimicrobiano"
+    )
 
-        return results
-
-    except Exception as e:
-        print(f"Error in prediction pipeline: {str(e)}")
-        raise
+    return probabilities
 
 
-def print_prediction_results(sequence, results):
-    """
-    Imprimir los resultados de la predicción de manera formateada.
 
-    Args:
-        sequence (str): Secuencia de entrada
-        results (dict): Resultados de la predicción
-    """
-    print("\nPrediction Results")
-    print("-" * 50)
-    print(f"Sequence: {sequence}")
-    print(f"SVM Probability: {results['SVM_probability']:.4f}")
-    print(f"Random Forest Probability: {results['RandomForest_probability']:.4f}")
-    print(f"Neural Network Probability: {results['NeuralNetwork_probability']:.4f}")
-    print(f"Average Probability: {results['average_probability']:.4f}")
-    print(f"Final Prediction: {results['final_prediction']}")
-    print("-" * 50)

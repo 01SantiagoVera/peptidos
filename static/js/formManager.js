@@ -1,33 +1,42 @@
-document.getElementById("prediction-form").addEventListener("submit", function(event) {
-    event.preventDefault(); // Evita el envío del formulario de manera tradicional
+document.getElementById("prediction-form").addEventListener("submit", async function(event) {
+    event.preventDefault(); // Evitar el envío tradicional del formulario
 
-    // Obtén el valor de la secuencia
+    // Obtener la secuencia ingresada
     const sequence = document.querySelector('input[name="sequence"]').value;
 
-    // Obtener la IP del usuario (considera capturarla desde el backend)
-    const userIp = "192.168.1.1"; // Cambia esto por la IP real si es necesario
+    // Obtener los modelos seleccionados
+    const selectedModels = Array.from(document.querySelectorAll('input[name="model"]:checked')).map(input => input.value);
 
-    // Realizar la solicitud POST
-   fetch("/api/predict", { // Cambia esto si usas un prefijo
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ sequence: sequence, user_ip: userIp })
-})
+    if (!sequence.trim()) {
+        alert("Por favor, ingresa una secuencia válida.");
+        return;
+    }
 
-    .then(response => {
+    if (selectedModels.length === 0) {
+        alert("Por favor, selecciona al menos un modelo.");
+        return;
+    }
+
+    try {
+        // Realizar la solicitud POST
+        const response = await fetch("/api/predict", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ sequence, models: selectedModels }) // Enviar modelos seleccionados
+        });
+
         if (!response.ok) {
-            throw new Error('Network response was not ok'); // Manejo de errores de red
+            throw new Error("Error en la respuesta del servidor.");
         }
-        return response.json();
-    })
-    .then(data => {
-        // Maneja la respuesta
+
+        const data = await response.json();
         console.log("Respuesta del servidor:", data);
-        alert("Predicción: " + data.prediction); // Muestra la predicción
-    })
-    .catch((error) => {
-        console.error("Error:", error); // Muestra el error en consola
-    });
+
+        // Mostrar resultados y almacenarlos
+        addToTable(sequence, data);
+        cacheQuery(sequence, data);
+    } catch (error) {
+        console.error("Error:", error);
+        alert("Hubo un problema procesando la predicción. Inténtalo de nuevo.");
+    }
 });
