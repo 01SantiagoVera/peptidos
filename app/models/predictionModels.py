@@ -115,9 +115,9 @@ def make_prediction(models, sequence, selected_models):
 
     probabilities["average_probability"] = avg_probability
     probabilities["final_prediction"] = (
-        "Es un péptido antimicrobiano"
+        "It's a peptide"
         if avg_probability is not None and avg_probability >= 0.5
-        else "No es un péptido antimicrobiano"
+        else "It is not a peptide"
     )
 
     return probabilities

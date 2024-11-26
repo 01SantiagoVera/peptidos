@@ -3,64 +3,78 @@
         <div class="row justify-content-center align-items-center text-center">
             <div class="col-xl-5 col-lg-6 d-flex flex-column align-items-center">
                 <!-- Títulos -->
-                <h1 class="hero">Antimicrobial Peptides</h1>
+                <h1 class="hero">PEPNOVA</h1>
+                <h3 class="hero">Antimicrobial Peptides Tool</h3>
                 <p>Platform for discovering, analyzing, and predicting antimicrobial peptides to support research and
                     development in biomedical fields.</p>
             </div>
         </div>
 
         <!-- Nueva fila para botón y formulario alineados horizontalmente -->
-        <div class="row justify-content-center align-items-center mt-4">
-            <div class="col-auto">
-                <button type="button" class="btn btn-outline-light" id="aboutUsButton"
-                        onclick="location.href='#aboutUs'">About us
-                </button>
-            </div>
-
-
-            <div class="row justify-content-center align-items-center mt-4">
+        <div class="row justify-content-center align-items-center mt-2">
+            <div class="row justify-content-center align-items-center ">
                 <!-- Opciones de selección de modelos -->
                 <div class="col-auto">
                     <form id="prediction-form" class="d-flex flex-column">
-                        <div class="mb-3">
-                            <label>Selecciona los modelos a usar:</label><br>
-                            <label><input type="checkbox" name="model" value="SVM" checked> SVM</label><br>
-                            <label><input type="checkbox" name="model" value="RF" checked> Random Forest</label><br>
-                            <label><input type="checkbox" name="model" value="NN" checked> Neural Network</label>
-                        </div>
-                        <div class="input-group">
+                        <!-- Input de texto y botón -->
+                        <div class="input-group mb-3">
                             <input type="text" name="sequence" class="form-control form-control-lg"
                                    placeholder="Search by Skills" aria-label="Search by Skills"
                                    aria-describedby="submit-btn"/>
                             <button class="btn btn-primary btn-lg" type="submit" id="submit-btn">Submit</button>
                         </div>
+                        <!-- Switches para selección de modelos -->
+                        <div class="mb-3">
+                            <div class="d-flex">
+                                <div class="form-check form-switch me-3">
+                                    <input class="form-check-input" type="checkbox" id="svmSwitch" name="model"
+                                           value="SVM" checked/>
+                                    <label class="form-check-label" for="svmSwitch">SVM</label>
+                                </div>
+                                <div class="form-check form-switch me-3">
+                                    <input class="form-check-input" type="checkbox" id="rfSwitch" name="model"
+                                           value="RF" checked/>
+                                    <label class="form-check-label" for="rfSwitch">Random Forest</label>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="nnSwitch" name="model"
+                                           value="NN" checked/>
+                                    <label class="form-check-label" for="nnSwitch">Neural Network</label>
+                                </div>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
 
-            <div class="container mt-5">
-                <h2 class="text-center">Resultados de Predicciones</h2>
-                <table id="results-table" class="table table-striped table-bordered">
-                    <thead>
-                    <tr>
-                        <th>Secuencia</th>
-                        <th>Probabilidad SVM</th>
-                        <th>Probabilidad RF</th>
-                        <th>Probabilidad NN</th>
-                        <th>Promedio</th>
-                        <th>Conclusión</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <!-- Las filas se añadirán dinámicamente aquí -->
-                    </tbody>
-                </table>
-            </div>
-            <div class="text-center mt-3">
-                <button class="btn btn-success" onclick="downloadQueries()">Descargar Consultas</button>
-            </div>
-            <div class="text-center mt-3">
-                <button class="btn btn-success" onclick="downloadQueriesAsExcel()">Descargar Consultas (Excel)</button>
+            <div class="container align-items-center mt-5">
+                <div class="container mt-5">
+                    <!-- Encabezado con título y botón -->
+                    <div id="results-container">
+                        <div class="d-flex align-items-center" style="gap: 10px;">
+                            <h2 class="text-center flex-grow-1 mb-0">Prediction Results </h2>
+                            <button class="btn btn-outline-light" onclick="downloadQueriesAsExcel()">Dowload</button>
+                        </div>
+                        <!-- Tabla -->
+                        <div class="mt-3">
+                            <table id="results-table" class="table table-striped table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Sequence</th>
+                                    <th>NN Probability</th>
+                                    <th>RF Probability</th>
+                                    <th>SVM Probability</th>
+                                    <th>Average Probability</th>
+                                    <th>Final Prediction</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <!-- Las filas se añadirán dinámicamente aquí -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
 
 
@@ -85,8 +99,8 @@
 
 <!-- About Us Section -->
 <section id="aboutUs" class="about-us-section py-5">
-    <div class="container">
-        <div class="row align-items-center d-flex">
+    <div class="container mt-5">
+        <div class="row align-items-center d-flex mt-5">
             <div class="col-md-6 animate-fade-in">
                 <h1 class="mb-0">About us</h1>
                 <p class="mb-0">Research in the field of antimicrobial peptides by providing a comprehensive and
@@ -96,6 +110,16 @@
             <div class="col-md-6 text-end animate-fade-in">
                 <img src="{{ url_for('static', filename='img/logo_transparent.png') }}" class="img-fluid"
                      alt="logo UDES" style="max-width: 200px;">
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row align-items-center d-flex">
+            <div class="col-md-6 animate-fade-in">
+                <h2>Credits: </h2>
+                <br>
+                <h3></h3>
             </div>
         </div>
     </div>

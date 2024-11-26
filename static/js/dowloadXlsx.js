@@ -7,12 +7,12 @@ function downloadQueriesAsExcel() {
 
     // Transformar los datos para que sean legibles en Excel
     const excelData = cachedQueries.map(query => ({
-        "Secuencia": query.sequence,
-        "SVM Probabilidad": query.prediction.SVM_probability,
-        "RF Probabilidad": query.prediction.RandomForest_probability,
-        "NN Probabilidad": query.prediction.NeuralNetwork_probability,
-        "Promedio Probabilidad": query.prediction.average_probability,
-        "Conclusión": query.prediction.final_prediction
+        "Sequence": query.sequence,
+        "SVM Probability": query.prediction.SVM_probability ?? "N/A", // Acceder a prediction.SVM_probability
+        "RF Probability": query.prediction.RandomForest_probability ?? "N/A",
+        "NN Probability": query.prediction.NeuralNetwork_probability ?? "N/A",
+        "Average Probability": query.prediction.average_probability ?? "N/A",
+        "Final Prediction": query.prediction.final_prediction ?? "N/A"
     }));
 
     // Crear un libro de Excel y una hoja
@@ -20,8 +20,8 @@ function downloadQueriesAsExcel() {
     const worksheet = XLSX.utils.json_to_sheet(excelData);
 
     // Agregar la hoja al libro
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Consultas");
+    XLSX.utils.book_append_sheet(workbook, worksheet, "querry");
 
     // Generar el archivo y descargarlo
-    XLSX.writeFile(workbook, "consultas.xlsx");
+    XLSX.writeFile(workbook, "querry.xlsx");
 }

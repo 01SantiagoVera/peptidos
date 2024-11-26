@@ -17,6 +17,19 @@ section {
   min-height: 400px;
   padding: 100px 20vw;
 }
+/* ---- section ------ */
+section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 400px;
+  padding: 100px 20vw;
+}
+#results-container {
+    display: none; /* Inicialmente oculto */
+}
+
 /* Sección Hero que ocupa toda la pantalla */
 .hero-section {
   min-height: 80vh; /* Ocupa el 100% de la altura de la pantalla */
