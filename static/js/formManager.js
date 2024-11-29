@@ -33,7 +33,7 @@ document.getElementById("prediction-form").addEventListener("submit", async func
         console.log("Respuesta del servidor:", data);
 
         // Mostrar resultados y almacenarlos
-        addToTable(sequence, data);
+        addToTable(data.prediction); // Cambiar aquí para enviar el array 'data.prediction'
         cacheQuery(sequence, data);
     } catch (error) {
         console.error("Error:", error);

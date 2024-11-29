@@ -6,17 +6,8 @@ import pandas as pd
 
 
 def generate_descriptors(sequence):
-    """
-    Generate sequence descriptors using ProPy3.
 
-    Args:
-        sequence (str): Input protein/peptide sequence
-
-    Returns:
-        np.ndarray: Array of descriptors
-    """
     try:
-        # Crear objeto ProPy
         DesObject = PyPro.GetProDes(sequence)
         descriptors = []
 
@@ -87,40 +78,63 @@ def load_models():
 
 def make_prediction(models, sequence, selected_models):
     model_SVM, model_RF, model_NN = models
-    encoded_sequence = process_sequence(sequence)
 
-    probabilities = {}
+    # Separar las secuencias
+    sequences = [seq.strip() for seq in sequence.replace(",", " ").split() if seq.strip()]
 
-    # Predicciones individuales
-    if "SVM" in selected_models:
-        probabilities["SVM_probability"] = round(model_SVM.predict_proba(encoded_sequence)[0][1], 2)
-    else:
-        probabilities["SVM_probability"] = None
+    all_predictions = []  # Lista para acumular las predicciones de todas las secuencias
 
-    if "RF" in selected_models:
-        probabilities["RandomForest_probability"] = round(model_RF.predict_proba(encoded_sequence)[0][1], 2)
-    else:
-        probabilities["RandomForest_probability"] = None
+    # Iterar sobre cada secuencia
+    for seq in sequences:
+        probabilities = {}
 
-    if "NN" in selected_models:
-        probabilities["NeuralNetwork_probability"] = round(model_NN.predict_proba(encoded_sequence)[0][1], 2)
-    else:
-        probabilities["NeuralNetwork_probability"] = None
+        try:
+            # Reasignar sequence para procesar individualmente
+            encoded_sequence = process_sequence(seq)
 
-    # Cálculo del promedio solo con valores válidos
-    valid_probabilities = [
-        value for value in probabilities.values() if value is not None
-    ]
-    avg_probability = round(sum(valid_probabilities) / len(valid_probabilities), 2) if valid_probabilities else None
+            # Predicciones individuales
+            if "SVM" in selected_models:
+                probabilities["SVM_probability"] = round(model_SVM.predict_proba(encoded_sequence)[0][1], 2)
+            else:
+                probabilities["SVM_probability"] = None
 
-    probabilities["average_probability"] = avg_probability
-    probabilities["final_prediction"] = (
-        "It's a peptide"
-        if avg_probability is not None and avg_probability >= 0.5
-        else "It is not a peptide"
-    )
+            if "RF" in selected_models:
+                probabilities["RandomForest_probability"] = round(model_RF.predict_proba(encoded_sequence)[0][1], 2)
+            else:
+                probabilities["RandomForest_probability"] = None
 
-    return probabilities
+            if "NN" in selected_models:
+                probabilities["NeuralNetwork_probability"] = round(model_NN.predict_proba(encoded_sequence)[0][1], 2)
+            else:
+                probabilities["NeuralNetwork_probability"] = None
 
+            # Cálculo del promedio solo con valores válidos
+            valid_probabilities = [
+                value for value in probabilities.values()
+                if value is not None and isinstance(value, (int, float))
+            ]
+            avg_probability = (
+                round(sum(valid_probabilities) / len(valid_probabilities), 2)
+                if valid_probabilities
+                else None
+            )
 
+            probabilities["input_sequence"] = seq
+            probabilities["average_probability"] = avg_probability
+            probabilities["final_prediction"] = (
+                "It's a peptide"
+                if avg_probability is not None and avg_probability >= 0.5
+                else "It is not a peptide"
+            )
 
+            # Acumular predicciones
+            all_predictions.append(probabilities)
+
+        except Exception as e:
+            all_predictions.append({
+                "input_sequence": seq,
+                "error": str(e)
+            })
+
+    # Retornar las predicciones de todas las secuencias
+    return all_predictions if all_predictions else None

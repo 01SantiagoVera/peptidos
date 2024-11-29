@@ -3,7 +3,13 @@
         <div class="row justify-content-center align-items-center text-center">
             <div class="col-xl-5 col-lg-6 d-flex flex-column align-items-center">
                 <!-- Títulos -->
-                <h1 class="hero">PEPNOVA</h1>
+                <div class="col-md-7 text-end">
+                    <img src="{{ url_for('static', filename='img/LogoPepnova_Blanco.png') }}"
+                         class="img-fluid mx-auto d-block"
+                         alt="Pepnova Logo"
+                         style="max-width: 200px;">
+                    <h1 class="hero">PEPNOVA</h1>
+                </div>
                 <h3 class="hero">Antimicrobial Peptides Tool</h3>
                 <p>Platform for discovering, analyzing, and predicting antimicrobial peptides to support research and
                     development in biomedical fields.</p>
@@ -47,7 +53,7 @@
                 </div>
             </div>
 
-            <div class="container align-items-center mt-5">
+            <div class="container align-items-center mt-5 ">
                 <div class="container mt-5">
                     <!-- Encabezado con título y botón -->
                     <div id="results-container">
@@ -96,31 +102,73 @@
     </g>
 </svg>
 
-
 <!-- About Us Section -->
 <section id="aboutUs" class="about-us-section py-5">
     <div class="container mt-5">
         <div class="row align-items-center d-flex mt-5">
             <div class="col-md-6 animate-fade-in">
-                <h1 class="mb-0">About us</h1>
-                <p class="mb-0">Research in the field of antimicrobial peptides by providing a comprehensive and
-                    easy-to-use API. Our platform offers access to extensive data, enabling researchers and developers
-                    to analyze, predict, and innovate in biomedical sciences.</p>
+                <h2 class="mb-3">About Us</h2>
+                <p class="lead">Our platform is a Python 3 web application designed to predict antimicrobial peptides
+                    (AMPs) using advanced machine learning techniques, including Random Forest, Neural Networks, and
+                    Support Vector Machines. The application leverages comprehensive protein sequence descriptors, such
+                    as Composition, Transition, and Distribution (CTD), to analyze peptide sequences.</p>
+                    <br>
+                    <p class="lead" >With improved portability and accuracy compared to similar tools, our system offers researchers the
+                    ability to process peptide data, generate meaningful predictions, and optimize models using novel
+                    training datasets. Antimicrobial Predictor provides an intuitive interface, robust data management,
+                    and downloadable reports, empowering innovation in biomedical research and antimicrobial drug
+                    development.</p>
             </div>
             <div class="col-md-6 text-end animate-fade-in">
-                <img src="{{ url_for('static', filename='img/logo_transparent.png') }}" class="img-fluid"
-                     alt="logo UDES" style="max-width: 200px;">
+                <img src="{{ url_for('static', filename='img/logo_transparent.png') }}"
+                     class="img-fluid mx-auto d-block"
+                     alt="UDES Logo"
+                     style="max-width: 400px;">
             </div>
         </div>
     </div>
+</section>
 
-    <div class="container">
-        <div class="row align-items-center d-flex">
-            <div class="col-md-6 animate-fade-in">
-                <h2>Credits: </h2>
-                <br>
-                <h3></h3>
+<section id="credits">
+    <div class="container mt-4">
+        <div class="row text-center ">
+            <div class="col-12">
+                <h3 class="mb-4">credits</h3>
             </div>
+
+            <div class="col-md-4 mb-3">
+                <h4 class="h5">Juanita Trejos Suárez</h4>
+                <p class="text-white">PhD(C) en Enfermedades Infecciosas</p>
+            </div>
+            <div class="col-md-4 mb-3">
+                <h4 class="h5">Nydia Paola Rondón Villareal</h4>
+                <p class="text-white">PhD en Ingeniería</p>
+            </div>
+            <div class="col-md-4 mb-3">
+                <h4 class="h5">Deisy Yurley Rodríguez Sarmiento</h4>
+                <p class="text-white">PhD en Bioquímica</p>
+            </div>
+            <div class="align-center d-flex justify-content-center align-items-center gap-3">
+                <div class="col-md-4 mb-3">
+                    <h4 class="h5">Néstor Iván Cardona Pérez</h4>
+                    <p class="text-white">PhD en Ciencias Biomédicas</p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h4 class="h5">Andrés Reyes Chaparro</h4>
+                    <p class="text-white">PhD en Ciencias</p>
+                </div>
+            </div>
+            <div class="align-center d-flex justify-content-center align-items-center gap-3">
+                <div class="col-md-4">
+                    <h4 class="h5">Jeison Mauricio Delgado González</h4>
+                    <p class="text-white">Magíster en Ciencias, Tecnología e Innovación</p>
+                </div>
+                <div class="col-md-4">
+                    <h4 class="h5">Santiago Vera Bustamante</h4>
+                    <p class="text-white">Est. Ingeniería de Software</p>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
