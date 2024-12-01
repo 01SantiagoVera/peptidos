@@ -27,26 +27,40 @@ def connect_to_database():
         return None
 
 
-def save_query(sequence, prediction, user_ip):
+def save_query(sequence, predictions, user_ip):
+    """
+    Guarda cada secuencia y predicción individualmente en la base de datos.
+
+    :param sequence: Secuencia completa proporcionada por el usuario (string).
+    :param predictions: Lista de predicciones para cada secuencia (list of dicts).
+    :param user_ip: Dirección IP del usuario que realiza la consulta (string).
+    """
     connection = connect_to_database()
     if connection is None:
         return  # Salir si no hay conexión
 
     cursor = connection.cursor()
 
-    # Convertir la predicción a una cadena JSON para almacenarla
-    prediction_str = str(prediction)
-
-    # Usar placeholders de ODBC (?) en lugar de %s
+    # Query de inserción ajustada para múltiples secuencias
     query = "INSERT INTO consultas (sequence, prediction, user_ip, timestamp) VALUES (?, ?, ?, GETDATE())"
-    values = (sequence, prediction_str, user_ip)
 
     try:
-        cursor.execute(query, values)
+        for prediction in predictions:
+            # Obtener la secuencia individual y la predicción correspondiente
+            individual_sequence = prediction.get("input_sequence", "N/A")
+            prediction_str = str(prediction)
+
+            # Valores a insertar
+            values = (individual_sequence, prediction_str, user_ip)
+
+            # Ejecutar la consulta
+            cursor.execute(query, values)
+
+        # Confirmar los cambios
         connection.commit()
-        print("Consulta guardada correctamente")
+        print("Consultas guardadas correctamente")
     except Exception as e:
-        print("Error al guardar la consulta:", e)
+        print("Error al guardar las consultas:", e)
         connection.rollback()
     finally:
         cursor.close()
