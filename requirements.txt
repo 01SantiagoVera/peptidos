@@ -30,3 +30,4 @@ flask-sqlalchemy==3.1.1
 greenlet==3.1.1
 sqlalchemy==2.0.36
 typing-extensions==4.12.2
+ensayo
