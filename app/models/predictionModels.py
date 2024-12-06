@@ -122,9 +122,9 @@ def make_prediction(models, sequence, selected_models):
             probabilities["input_sequence"] = seq
             probabilities["average_probability"] = avg_probability
             probabilities["final_prediction"] = (
-                "It's a peptide"
+                "It's an Antimicrobial peptide"
                 if avg_probability is not None and avg_probability >= 0.5
-                else "It is not a peptide"
+                else "It is not an Antimicrobial peptide"
             )
 
             # Acumular predicciones
