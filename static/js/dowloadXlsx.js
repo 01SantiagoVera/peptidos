@@ -7,19 +7,22 @@ function downloadQueriesAsExcel() {
 
     // Transformar los datos para que sean legibles en Excel
     const excelData = cachedQueries.flatMap(query => {
-        if (!Array.isArray(query.prediction)) {
-            console.warn("El campo 'prediction' no es un array:", query);
+        if (!Array.isArray(query.sequence)) {
+            console.warn("El campo 'sequence' no es un array:", query);
             return []; // Ignorar entradas malformadas
         }
 
-        return query.prediction.map(prediction => ({
-            "Input Sequence": prediction.input_sequence || "N/A", // Secuencia individual
-            "SVM Probability": prediction.SVM_probability ?? "N/A",
-            "RF Probability": prediction.RandomForest_probability ?? "N/A",
-            "NN Probability": prediction.NeuralNetwork_probability ?? "N/A",
-            "Average Probability": prediction.average_probability ?? "N/A",
-            "Final Prediction": prediction.final_prediction ?? "N/A"
-        }));
+        // Recorremos el array interno de 'sequence'
+        return query.sequence.flatMap(innerArray => {
+            return innerArray.map(prediction => ({
+                "Input Sequence": prediction.input_sequence || "N/A", // Secuencia individual
+                "SVM Probability": prediction.SVM_probability ?? "N/A",
+                "RF Probability": prediction.RandomForest_probability ?? "N/A",
+                "NN Probability": prediction.NeuralNetwork_probability ?? "N/A",
+                "Average Probability": prediction.average_probability ?? "N/A",
+                "Final Prediction": prediction.final_prediction ?? "N/A"
+            }));
+        });
     });
 
     // Verificar los datos transformados

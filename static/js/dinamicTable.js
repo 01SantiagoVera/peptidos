@@ -1,4 +1,5 @@
 function addToTable(data) {
+    console.log(data); // Imprime la estructura de 'data' para depuración
     const container = document.getElementById("results-container");
     const table = document.getElementById("results-table");
     const tbody = table.querySelector("tbody");
@@ -8,12 +9,15 @@ function addToTable(data) {
         container.style.display = 'block'; // Muestra el contenedor
     }
 
-    // Verificar si 'data' es un array
-    if (Array.isArray(data)) {
-        data.forEach(seq => {
+    // Aplanar el array de predicciones
+    const flatData = data.flat();
+
+    // Verificar si 'flatData' es un array
+    if (Array.isArray(flatData)) {
+        flatData.forEach(seq => {
+            console.log(seq); // Imprime cada objeto para ver qué contiene
             if (seq && seq.input_sequence) { // Verificar que 'seq' tenga 'input_sequence'
                 const sequence = seq.input_sequence; // Usar 'input_sequence' directamente
-
                 const models = Object.keys(seq).filter(key => key.includes("probability"));
                 const avgProbability = seq.average_probability ?? "N/A";
                 const finalPrediction = seq.final_prediction ?? "N/A";
