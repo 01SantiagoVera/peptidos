@@ -29,7 +29,11 @@ function addToTable(data) {
                 // Agregar los valores de los modelos
                 models.forEach(model => {
                     const value = seq[model] !== undefined ? seq[model] : "No utilizado";
-                    row.insertCell(-1).textContent = typeof value === "number" ? value.toFixed(2) : value;
+                    if (typeof value === "number") {
+                        row.insertCell(-1).textContent = `${(value * 100).toFixed(2)}%`;
+                    } else {
+                        row.insertCell(-1).textContent = value;
+                    }
                 });
 
                 // Agregar la conclusión

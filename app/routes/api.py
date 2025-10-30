@@ -41,7 +41,11 @@ def predict():
         for seq in sequences:
             # Usar la función de predicción
             prediction = make_prediction(models, seq, selected_models)
-            predictions.append(prediction)
+            # Por esta:
+            if isinstance(prediction, list):
+                predictions.extend(prediction)
+            else:
+                predictions.append(prediction)
 
             # Guardar en la base de datos
             user_ip = request.remote_addr

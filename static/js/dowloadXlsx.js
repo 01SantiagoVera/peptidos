@@ -6,23 +6,26 @@ function downloadQueriesAsExcel() {
     }
 
     // Transformar los datos para que sean legibles en Excel
+    const toPercent = (v) => (typeof v === 'number' ? `${(v * 100).toFixed(2)}%` : (v ?? 'N/A'));
+
     const excelData = cachedQueries.flatMap(query => {
+        // Verificar que 'sequence' sea un array
         if (!Array.isArray(query.sequence)) {
             console.warn("El campo 'sequence' no es un array:", query);
             return []; // Ignorar entradas malformadas
         }
 
-        // Recorremos el array interno de 'sequence'
-        return query.sequence.flatMap(innerArray => {
-            return innerArray.map(prediction => ({
-                "Input Sequence": prediction.input_sequence || "N/A", // Secuencia individual
-                "SVM Probability": prediction.SVM_probability ?? "N/A",
-                "RF Probability": prediction.RandomForest_probability ?? "N/A",
-                "NN Probability": prediction.NeuralNetwork_probability ?? "N/A",
-                "Average Probability": prediction.average_probability ?? "N/A",
-                "Final Prediction": prediction.final_prediction ?? "N/A"
-            }));
-        });
+        // ✅ Versión ajustada: manejar array plano de objetos
+        // Antes: query.sequence.flatMap(innerArray => innerArray.map(...))
+        // Ahora: solo map directo
+        return query.sequence.map(prediction => ({
+            "Input Sequence": prediction.input_sequence || "N/A",
+            "SVM Probability": toPercent(prediction.SVM_probability),
+            "RF Probability": toPercent(prediction.RandomForest_probability),
+            "NN Probability": toPercent(prediction.NeuralNetwork_probability),
+            "Average Probability": toPercent(prediction.average_probability),
+            "Final Prediction": prediction.final_prediction ?? "N/A"
+        }));
     });
 
     // Verificar los datos transformados
@@ -34,14 +37,12 @@ function downloadQueriesAsExcel() {
     }
 
     try {
-        // Crear un libro de Excel y una hoja
+        // Crear libro y hoja de Excel
         const workbook = XLSX.utils.book_new();
         const worksheet = XLSX.utils.json_to_sheet(excelData);
 
-        // Agregar la hoja al libro
+        // Agregar hoja y exportar
         XLSX.utils.book_append_sheet(workbook, worksheet, "Queries");
-
-        // Generar el archivo y descargarlo
         XLSX.writeFile(workbook, "queries.xlsx");
     } catch (error) {
         console.error("Error al generar el archivo Excel:", error);
